@@ -23,24 +23,20 @@ mongoose.connect(process.env.MONGODB_URL)
 
 
   })
-app.post("/register", async (req, res) =>{
- 
-  try {
-    const newUser = new User({ username, password, role });
-    await new User.save();
-    res.status(201).json({ message: 'User registered successfully.' });
-  } catch (err) {
-    console.error('Error registering user:', err); // Log the error
-    res.status(400).json({ message: 'User registration failed.', error: err 
-    
-    });
-  }
 
+app.post('/register', async (req, res) => {
   
- 
- 
- 
- 
-  const { username, password,role} = req.body
-})
- 
+        const { username, password, role } = req.body;
+
+        // Create and save the new user
+        const newUser = new User({ username, password, role });
+        await newUser.save();
+
+        // Respond with success
+        res.status(201).json({
+            message: 'User registered successfully.',
+            newUser,
+        });
+    
+  
+});
